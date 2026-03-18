@@ -2,6 +2,8 @@ from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from openai import OpenAI
+from dotenv import load_dotenv
+load_dotenv()
 import pandas as pd
 import sqlite3, json, traceback, io, os
 
@@ -45,7 +47,7 @@ except Exception as e:
 # ── OpenRouter client ────────────────────────────────────────────
 client = OpenAI(
     base_url="https://openrouter.ai/api/v1",
-    api_key="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"
+    api_key=os.getenv("OPENROUTER_API_KEY", "")
 )
 
 # ── AI Prompt ────────────────────────────────────────────────────
